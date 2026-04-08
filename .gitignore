@@ -1,0 +1,10 @@
+node_modules
+.env
+.memory
+.tasks
+.team
+.task_outputs
+.transcripts
+.runtime-tasks
+.worktrees
+dist
