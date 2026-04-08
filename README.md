@@ -42,6 +42,12 @@
 
 ```txt
 agents/
+  s01_agent_loop.ts
+  s02_tool_use.ts
+  ...
+  s19_mcp_plugin.ts
+  s_full.ts
+agents_self_contained/
   _runtime.ts
   s01_agent_loop.ts
   s02_tool_use.ts
@@ -52,7 +58,7 @@ skills/
   example/SKILL.md
 ```
 
-`agents/_runtime.ts` 是共享教学 runtime，章节文件只负责组合机制。
+`agents_self_contained/_runtime.ts` 是共享教学 runtime，章节文件只负责组合机制。
 
 ## 快速开始
 
@@ -76,6 +82,19 @@ npm run s09
 npm run full
 ```
 
+## 自包含章节（Python 风格）
+
+如果你更喜欢 Python 版那种“每章单文件自包含、打开一个文件就能看到完整运行逻辑”的阅读方式，可以使用：
+
+- `agents/`：每个 `sXX` 文件都内嵌完整 runtime + 当前章节 wiring。
+- 生成命令：`npm run gen:self-contained`
+- 运行示例：`npm run sc:s01`、`npm run sc:full`
+
+说明：
+
+- `agents_self_contained/` 保持原本“共享 `_runtime.ts` + 章节组合”的结构不变。
+- `agents/` 是为教学阅读体验准备的并行镜像，方便逐章对照。
+
 ## 推荐阅读顺序
 
 按章节从前往后读：
@@ -84,6 +103,18 @@ npm run full
 2. `s07-s11`：补上安全、扩展点、记忆、提示词装配和恢复能力
 3. `s12-s14`：把会话内工作变成可持续运行的任务系统
 4. `s15-s19`：进入团队协作、自治、隔离执行和外部能力接入
+
+## 中文学习入口
+
+中文主学习入口固定为：
+
+- `docs/zh/README.md`
+- `docs/zh/s01-s19-practice-checklist.md`（每章 3 个实操任务）
+
+说明：
+
+- `docs/zh/` 是唯一主线文档入口（持续维护）。
+- `docs/zh-ts/` 保留为镜像草稿区，不作为主入口。
 
 ## 章节对照
 
@@ -115,7 +146,7 @@ npm run full
 - 核心机制保持一致
 - 示例代码改为 `TypeScript`
 - 运行方式改为 `Node.js + tsx`
-- 公共逻辑抽到了 `agents/_runtime.ts`，避免把同一套实现复制 19 次
+- 公共逻辑抽到了 `agents_self_contained/_runtime.ts`，避免把同一套实现复制 19 次
 
 如果你是从 Python 版迁移过来的，可以把这个仓库理解成：
 
